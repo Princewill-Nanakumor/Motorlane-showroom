@@ -41,11 +41,12 @@ export function VehicleDetailsView({ id }: VehicleDetailsViewProps) {
 
   return (
     <div className="vehicle-page">
-      <nav className="breadcrumb" aria-label="Breadcrumb">
-        <Link href="/">Showroom</Link>
-        <span aria-hidden="true">/</span>
-        <span>{vehicle.title}</span>
-      </nav>
+      <Link href="/" className="back-link">
+        <span className="back-link__arrow" aria-hidden="true">
+          ←
+        </span>
+        Back to showroom
+      </Link>
       <VehicleDetails vehicle={vehicle} />
     </div>
   );

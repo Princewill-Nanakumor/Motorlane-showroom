@@ -7,7 +7,7 @@ export function VehicleDetailsSkeleton() {
     >
       <span className="visually-hidden">Loading vehicle…</span>
 
-      <div className="skeleton skeleton--breadcrumb" />
+      <div className="skeleton skeleton--back" />
 
       <div className="vehicle-details vehicle-details-skeleton__panel">
         <div className="vehicle-details-skeleton__header">

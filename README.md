@@ -2,6 +2,8 @@
 
 A Next.js 15 App Router SPA that lists vehicles from DummyJSON, supports search/filter, and lets visitors leave comments persisted in `localStorage`.
 
+**Live demo:** [https://motorlane-showroom.netlify.app](https://motorlane-showroom.netlify.app)
+
 ## Features
 
 - Vehicle catalog from DummyJSON (`/products/category/vehicle`)
@@ -102,9 +104,13 @@ car-showroom/
 
 ## Deployment
 
+**Live site:** [https://motorlane-showroom.netlify.app](https://motorlane-showroom.netlify.app)
+
+Hosted on [Netlify](https://www.netlify.com/).
+
 ```bash
 npm run build
 npm run start
 ```
 
-Deploy to Vercel or any host that supports Next.js. Deep links like `/vehicles/167` must be handled by the Next.js server (default on Vercel).
+Deep links like `/vehicles/167` must be handled by the Next.js server (Netlify/Vercel do this by default).
