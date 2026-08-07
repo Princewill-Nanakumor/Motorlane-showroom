@@ -7,8 +7,13 @@ import { VehicleGrid } from '@/components/vehicles/VehicleGrid';
 import { VehicleGridSkeleton } from '@/components/vehicles/VehicleGridSkeleton';
 import { VehicleSearch } from '@/components/vehicles/VehicleSearch';
 import { useVehicles } from '@/hooks/useVehicles';
+import type { Vehicle } from '@/types/vehicle';
 
-export function VehicleShowroom() {
+interface VehicleShowroomProps {
+  initialVehicles?: Vehicle[];
+}
+
+export function VehicleShowroom({ initialVehicles }: VehicleShowroomProps) {
   const {
     vehicles,
     brands,
@@ -17,7 +22,7 @@ export function VehicleShowroom() {
     error,
     updateFilter,
     resetFilters,
-  } = useVehicles();
+  } = useVehicles(initialVehicles);
 
   if (loading) {
     return <VehicleGridSkeleton />;

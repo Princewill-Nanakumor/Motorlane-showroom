@@ -15,13 +15,18 @@ const DEFAULT_FILTERS: VehicleFilters = {
   sortBy: 'default',
 };
 
-export function useVehicles() {
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+export function useVehicles(initialVehicles?: Vehicle[]) {
+  const hasInitial = Boolean(initialVehicles?.length);
+  const [vehicles, setVehicles] = useState<Vehicle[]>(initialVehicles ?? []);
   const [filters, setFilters] = useState<VehicleFilters>(DEFAULT_FILTERS);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasInitial);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (hasInitial) {
+      return;
+    }
+
     let cancelled = false;
 
     async function load() {
@@ -51,7 +56,7 @@ export function useVehicles() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [hasInitial]);
 
   const filteredVehicles = useMemo(() => {
     const filtered = filterVehicles(vehicles, filters);
