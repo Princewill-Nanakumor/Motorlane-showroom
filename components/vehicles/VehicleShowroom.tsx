@@ -36,10 +36,11 @@ export function VehicleShowroom() {
   return (
     <div className="showroom">
       <header className="showroom__intro">
+        <p className="showroom__eyebrow">Virtual showroom</p>
         <h1 className="showroom__title">Motorlane</h1>
         <p className="showroom__subtitle">
-          Browse available vehicles, refine by price or brand, and open a model
-          for details and comments.
+          Explore available vehicles. Filter by price, brand, or rating — then
+          open a model for details and comments.
         </p>
       </header>
 

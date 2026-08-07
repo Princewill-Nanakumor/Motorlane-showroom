@@ -43,7 +43,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
               <dd>{vehicle.category}</dd>
             </div>
           </dl>
-          <span className="vehicle-card__cta">View Details</span>
+          <span className="vehicle-card__cta">Learn more</span>
         </div>
       </Link>
     </article>
