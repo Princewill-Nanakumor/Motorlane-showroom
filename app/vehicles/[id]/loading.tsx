@@ -1,10 +1,10 @@
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { Container } from '@/components/layout/Container';
+import { VehicleDetailsSkeleton } from '@/components/vehicles/VehicleDetailsSkeleton';
 
 export default function Loading() {
   return (
     <Container className="page">
-      <LoadingSpinner label="Loading vehicle…" />
+      <VehicleDetailsSkeleton />
     </Container>
   );
 }

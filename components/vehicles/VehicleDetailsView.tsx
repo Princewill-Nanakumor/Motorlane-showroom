@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { ErrorMessage } from '@/components/common/ErrorMessage';
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { VehicleDetails } from '@/components/vehicles/VehicleDetails';
+import { VehicleDetailsSkeleton } from '@/components/vehicles/VehicleDetailsSkeleton';
 import { useVehicle } from '@/hooks/useVehicle';
 
 interface VehicleDetailsViewProps {
@@ -14,7 +14,7 @@ export function VehicleDetailsView({ id }: VehicleDetailsViewProps) {
   const { vehicle, loading, error, notFound: missing } = useVehicle(id);
 
   if (loading) {
-    return <LoadingSpinner label="Loading vehicle…" />;
+    return <VehicleDetailsSkeleton />;
   }
 
   if (missing) {

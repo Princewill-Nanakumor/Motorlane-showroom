@@ -2,9 +2,9 @@
 
 import { EmptyState } from '@/components/common/EmptyState';
 import { ErrorMessage } from '@/components/common/ErrorMessage';
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
 import { VehicleFilters } from '@/components/vehicles/VehicleFilters';
 import { VehicleGrid } from '@/components/vehicles/VehicleGrid';
+import { VehicleGridSkeleton } from '@/components/vehicles/VehicleGridSkeleton';
 import { VehicleSearch } from '@/components/vehicles/VehicleSearch';
 import { useVehicles } from '@/hooks/useVehicles';
 
@@ -20,7 +20,7 @@ export function VehicleShowroom() {
   } = useVehicles();
 
   if (loading) {
-    return <LoadingSpinner label="Loading vehicles…" />;
+    return <VehicleGridSkeleton />;
   }
 
   if (error) {
