@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Motorlane — Virtual Car Showroom
 
-## Getting Started
+A Next.js 15 App Router SPA that lists vehicles from DummyJSON, supports search/filter, and lets visitors leave comments persisted in `localStorage`.
 
-First, run the development server:
+## Features
+
+- Vehicle catalog from DummyJSON (`/products/category/vehicle`)
+- Search by brand, title, and description
+- Filters for min/max price, rating, and brand
+- Sorting by price, rating, and name
+- Vehicle detail page with image gallery and specifications
+- Merged comments: API reviews + local comments
+- Comment form with Zod + React Hook Form validation
+- Comments saved in `localStorage` and restored after refresh
+- Responsive layout from 420px to 1440px (plain CSS, no frameworks)
+- Unit tests (Vitest) and end-to-end tests (Playwright)
+
+## Tech stack
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Zod
+- React Hook Form
+- Plain CSS
+- localStorage
+- Vitest
+- Playwright
+- ESLint
+- Prettier
+
+## Setup
 
 ```bash
+npm install
+npx playwright install chromium
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format with Prettier |
+| `npm test` | Run Vitest unit tests |
+| `npm run test:e2e` | Run Playwright e2e tests |
 
-## Learn More
+## API
 
-To learn more about Next.js, take a look at the following resources:
+Base URL: `https://dummyjson.com`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Endpoint | Usage |
+| --- | --- |
+| `GET /products/category/vehicle` | Vehicle list |
+| `GET /products/{id}` | Vehicle details |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+API helpers live in `lib/api/`.
 
-## Deploy on Vercel
+## Local storage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Key: `car-showroom-comments`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Structure:
+
+```json
+{
+  "167": {
+    "vehicleId": 167,
+    "comments": [
+      {
+        "id": "uuid",
+        "vehicleId": 167,
+        "name": "Alex",
+        "comment": "Great ride",
+        "createdAt": "2026-08-07T12:00:00.000Z"
+      }
+    ]
+  }
+}
+```
+
+Functions: `getComments`, `saveComment`, `deleteComment`, `clearComments`.
+
+## Testing
+
+### Vitest
+
+Covers:
+
+- `commentSchema` validation
+- `localStorage` comment helpers
+- `filterVehicles` / `sortVehicles`
+- comments merge
+- API helpers
+
+```bash
+npm test
+```
+
+### Playwright
+
+Covers:
+
+- Homepage load
+- Search
+- Vehicle details navigation
+- Comment submission
+- Comment persistence after refresh
+- Form validation
+
+```bash
+npm run test:e2e
+```
+
+## Project structure
+
+```text
+car-showroom/
+├── app/                  # App Router pages, loading, error states
+├── components/
+│   ├── layout/
+│   ├── vehicles/
+│   ├── comments/
+│   └── common/
+├── hooks/                # useVehicles, useVehicle, useComments
+├── lib/
+│   ├── api/
+│   ├── storage/
+│   ├── validation/
+│   └── utils/
+├── types/
+├── test/                 # Vitest unit tests
+├── e2e/                  # Playwright tests
+└── public/
+```
+
+## Routes
+
+| Route | Description |
+| --- | --- |
+| `/` | Vehicle list, search, filters |
+| `/vehicles/[id]` | Vehicle details, reviews, comment form |
+
+## Deployment
+
+Deploy to Vercel or any Node host that supports Next.js.
+
+Client-side routing note: deep links like `/vehicles/167` must be served by the Next.js app (or rewritten to it). On Vercel this works by default. On static hosts, configure fallbacks so unknown paths reach the app.
+
+```bash
+npm run build
+npm run start
+```
+
+## License
+
+Private test assignment project.
