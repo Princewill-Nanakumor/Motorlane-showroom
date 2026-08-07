@@ -487,9 +487,23 @@ p {
 }
 
 .vehicle-gallery__main {
+  position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--bg-elevated);
+}
+
+.vehicle-gallery__main .vehicle-gallery__image {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.vehicle-gallery__main .vehicle-gallery__image--active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .vehicle-gallery__thumbs {

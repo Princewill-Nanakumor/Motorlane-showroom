@@ -10,23 +10,29 @@ interface VehicleGalleryProps {
 
 export function VehicleGallery({ images, alt }: VehicleGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeImage = images[activeIndex] ?? images[0];
 
-  if (!activeImage) {
+  if (images.length === 0) {
     return <div className="vehicle-gallery vehicle-gallery--empty" />;
   }
 
   return (
     <div className="vehicle-gallery">
       <div className="vehicle-gallery__main">
-        <Image
-          src={activeImage}
-          alt={alt}
-          width={1200}
-          height={720}
-          className="vehicle-gallery__image"
-          priority
-        />
+        {images.map((image, index) => (
+          <Image
+            key={image}
+            src={image}
+            alt={index === activeIndex ? alt : ''}
+            width={1200}
+            height={720}
+            className={`vehicle-gallery__image${
+              index === activeIndex ? ' vehicle-gallery__image--active' : ''
+            }`}
+            priority={index === 0}
+            sizes="(max-width: 1200px) 100vw, 1200px"
+            aria-hidden={index !== activeIndex}
+          />
+        ))}
       </div>
       {images.length > 1 ? (
         <ul className="vehicle-gallery__thumbs">
